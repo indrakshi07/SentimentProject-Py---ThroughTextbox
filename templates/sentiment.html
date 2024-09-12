@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sentiment Analysis</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">ShopLogo</div>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="#">Products</a></li>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a href="/sentiment">Feedback</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <section id="analysis">
+        <h1>Sentiment Analysis</h1>
+
+        <!-- Form for text input -->
+        <form method="POST" action="{{ url_for('sentiment') }}">
+            <textarea name="text" id="text_id" placeholder="Enter text here..."></textarea><br>
+            <button type="submit">Analyze Sentiment</button>
+        </form>
+
+        <!-- Display sentiment analysis results -->
+        {% if sentiment %}
+        <h2>Sentiment Analysis Result:</h2>
+            <p>Given Text: {{ original_text }}</p>
+            <p>Positive: {{ sentiment.pos }}</p>
+            <p>Neutral: {{ sentiment.neu }}</p>
+            <p>Negative: {{ sentiment.neg }}</p>
+            <p>Compound: {{ sentiment.compound }}</p>
+        {% elif error %}
+            <p>{{ error }}</p>
+        {% endif %}
+        </section>
+
+    <footer>
+        <p>&copy; 2024 Shopping Website. All rights reserved.</p>
+    </footer>
+
+    <!-- JavaScript for handling voice recognition -->
+    <script>
+        document.getElementById('voice-button').onclick = async function() {
+            const response = await fetch('/analyze_voice', {
+                method: 'POST'
+            });
+            const result = await response.text();
+            alert(result); // Show the result in an alert box for simplicity
+        };
+    </script>
+</body>
+</html>

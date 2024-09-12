@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sentiment Analysis</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">ShopLogo</div>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="#">Products</a></li>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a href="/sentiment">Feedback</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Welcome to Our Shop</h1>
+            <p>Discover the latest products and trends.</p>
+            <button>Shop Now</button>
+        </div>
+    </section>
+    
+    <section class="products">
+        <h2>Featured Products</h2>
+        <div class="product-list">
+            <div class="product">
+                <img src="https://m.media-amazon.com/images/I/51U1qOkfRrL._AC_UY1100_.jpg" alt="Product 1">
+                <h3>Product 1</h3>
+                <p>$25.00</p>
+            </div>
+            <div class="product">
+                <img src="https://m.media-amazon.com/images/I/81ZUL5rCfmL._AC_UY1100_.jpg" alt="Product 2">
+                <h3>Product 2</h3>
+                <p>$30.00</p>
+            </div>
+            <div class="product">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQOwQQQqKUZVCq1296QeFtT-9I1oZH2TuqbZw&s" alt="Product 3">
+                <h3>Product 3</h3>
+                <p>$20.00</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Shopping Website. All rights reserved.</p>
+    </footer>
+
+    <!-- JavaScript for handling voice recognition -->
+    <script>
+        document.getElementById('voice-button').onclick = async function() {
+            const response = await fetch('/analyze_voice', {
+                method: 'POST'
+            });
+            const result = await response.text();
+            alert(result); // Show the result in an alert box for simplicity
+        };
+    </script>
+</body>
+</html>
